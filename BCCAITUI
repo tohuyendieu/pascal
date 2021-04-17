@@ -1,0 +1,50 @@
+Const  fi='';
+       fo='';
+
+var a,c:array[0..100] of longint;
+    L:array[0..100,0..100] of longint;
+    n,m:longint;
+
+procedure enter;
+var i:longint;
+begin
+    readln(n,m);
+    for i:=1 to n do readln(a[i],c[i]);
+end;
+
+procedure solve;
+var i,j:longint;
+begin
+    fillchar(L[0],sizeof(L[0]),0);
+    for i:=1 to n do
+      for j:=0 to m do
+        begin
+          L[i,j]:=L[i-1,j];
+          if (j>=a[i]) and (L[i,j] < L[ i-1, j-a[i] ]+c[i]) then
+            L[i,j]:=L[i-1, j-a[i]]+c[i];
+        end;
+    write(L[n,m]);
+end;
+
+procedure truyvet;
+begin
+    writeln('gia tri max= ',L[n,m]);
+    while (n<>0) do
+      begin
+        if L[n,m]<>L[n-1, m] then
+          begin
+            writeln(n);
+            m:=m-a[n];
+          end;
+        dec(n);
+      end;
+end;
+
+begin
+     assign(input,fi);  reset(input);
+     assign(output,fo); rewrite(output);
+     enter;
+     solve;
+     //truyvet;
+     close(input);   close(output);
+end.
