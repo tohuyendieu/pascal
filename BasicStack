@@ -1,0 +1,64 @@
+const   fi='';
+        nmax=1000;
+        
+var
+        f:text;
+        A:array[0..nmax] of longint;
+        n:integer;
+        s:string;
+ 
+procedure init;
+begin
+        n:=0;
+end;
+ 
+procedure pop;
+begin
+        if n=0 then exit;
+        dec(n);
+end;
+ 
+procedure top;
+begin
+        writeln(a[n]);
+end;
+ 
+procedure empty;
+begin
+        if n=0 then writeln(1)
+        else
+                writeln(0);
+end;
+ 
+procedure push;
+var     x,r:longint;
+begin
+        delete(s,1,5);
+        val(s,x,r);
+        inc(n);
+        a[n]:=x;
+end;
+ 
+procedure xuli;
+begin
+        a[0]:=-1;
+        repeat
+                readln(f,s);
+                case s of
+                'init': init;
+                'end': exit;
+                'pop': pop;
+                'top': top;
+                'size': writeln(n);
+                'empty': empty;
+                else
+                        push;
+                end;
+        until 1=2;
+end;
+ 
+begin
+        assign(f,fi); reset(f);
+        xuli;
+        close(f);
+end.
